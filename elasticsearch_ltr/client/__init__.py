@@ -1,9 +1,11 @@
 from elasticsearch import Elasticsearch
 from elasticsearch.client import Transport
-from .ltr import LTRClient
+
+from .models import ModelsClient
+from .features import FeaturesClient
 
 
-class ElasticsearhLTR(Elasticsearch):
+class ElasticsearchLTR(Elasticsearch):
 
     def __init__(self, hosts=None, transport_class=Transport, **kwargs):
         """
@@ -24,4 +26,5 @@ class ElasticsearhLTR(Elasticsearch):
         """
         Elasticsearch.__init__(self, hosts=hosts, transport_class=transport_class, **kwargs)
 
-        self.ltr = LTRClient(self)
+        self.features = FeaturesClient(self)
+        self.models = ModelsClient(self)
